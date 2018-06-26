@@ -2,6 +2,10 @@ package com.android.example.newsapp;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 final class QueryUtils {
 
@@ -124,5 +129,58 @@ final class QueryUtils {
             Log.e(LOG_TAG, "Error closing input stream. ", e);
         }
         return jsonResponse;
+    }
+
+    /**
+     * Gets the news stories from the JSON query
+     * @param jsonQuery the URL to query, as a string
+     * @return          an ArrayList of news stories
+     */
+    public static ArrayList<NewsStory> extractNewsStories (String jsonQuery) {
+
+        ArrayList<NewsStory> newsStories = new ArrayList<>();
+
+        // Try to parse the JSON info given
+        try {
+            // Grab the JSON info
+            String jsonResponse = getJsonInfo(jsonQuery);
+
+            // Grab the results
+            JSONObject storyList = new JSONObject(jsonResponse);
+            JSONArray stories = storyList.getJSONArray("results");
+
+            // Parse each story, add the relevant information to the list
+            for (int i = 0; i < stories.length(); i++) {
+                JSONObject story = stories.getJSONObject(i);
+                JSONArray authorList = story.getJSONArray("tags");
+
+                // Get author first, as it takes the most work
+                StringBuilder authors = new StringBuilder();
+                for (int j = 0; j < authorList.length(); j++) {
+                    JSONObject author = authorList.getJSONObject(j);
+                    authors.append(author.getString("webTitle"));
+
+                    // If the list is not almost done, add a comma
+                    if (j < authorList.length() - 1) {
+                        authors.append(", ");
+                    }
+                }
+
+                // Set up the parameters for the constructor
+                String title = story.getString("webTitle");
+                String author = authors.toString();
+                String category = story.getString("sectionName");
+                String date = story.getString("webPublicationDate");
+                String url = story.getString("webUrl");
+
+                // Create a new NewsStory
+                newsStories.add(new NewsStory(title, author, category, date, url));
+            }
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error parsing JSON results.", e);
+        }
+
+        // Return the list
+        return newsStories;
     }
 }
