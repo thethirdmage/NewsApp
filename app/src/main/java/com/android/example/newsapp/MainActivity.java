@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -22,16 +23,18 @@ public class MainActivity extends AppCompatActivity
 
     private NewsStoryAdapter adapter;
     private TextView emptyView;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set up the empty view
+        // Set up the empty view and progress bar
         ListView newsStoryList = findViewById(R.id.list);
         emptyView = findViewById(R.id.noConnection);
         newsStoryList.setEmptyView(emptyView);
+        progressBar = findViewById(R.id.loading);
 
         // Get the current network state
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity
             LoaderManager loaderManager = getSupportLoaderManager();
             loaderManager.initLoader(1, null, this);
         } else {
+            progressBar.setVisibility(View.GONE);
             emptyView.setText(R.string.no_connection);
         }
 
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity
         adapter.clear();
 
         emptyView.setText(R.string.no_stories);
+        progressBar.setVisibility(View.GONE);
 
         if (stories != null && !stories.isEmpty()) {
             adapter.addAll(stories);

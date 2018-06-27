@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/pullToRefresh">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/list"/>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/list"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        tools:text="No internet connection."
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:id="@+id/noConnection"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            tools:text="No internet connection."
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:id="@+id/noConnection"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/loading"
+        style="@style/Widget.AppCompat.ProgressBar"/>
 
-    </RelativeLayout>
+</RelativeLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
