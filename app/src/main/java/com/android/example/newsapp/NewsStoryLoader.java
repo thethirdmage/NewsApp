@@ -9,7 +9,7 @@ public class NewsStoryLoader extends AsyncTaskLoader<ArrayList<NewsStory>> {
 
     private String mUrl;
 
-    public NewsStoryLoader(Context context, String url) {
+    NewsStoryLoader(Context context, String url) {
         super(context);
         mUrl = url;
     }

@@ -146,7 +146,8 @@ final class QueryUtils {
             String jsonResponse = getJsonInfo(jsonQuery);
 
             // Grab the results
-            JSONObject storyList = new JSONObject(jsonResponse);
+            JSONObject response = new JSONObject(jsonResponse);
+            JSONObject storyList = response.getJSONObject("response");
             JSONArray stories = storyList.getJSONArray("results");
 
             // Parse each story, add the relevant information to the list
