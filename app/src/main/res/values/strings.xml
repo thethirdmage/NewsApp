@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">News App</string>
     <string name="api_key">69f99965-469b-4cb1-823f-fb535b57ff81</string>
+    <string name="no_connection">No internet connection.</string>
 </resources>
