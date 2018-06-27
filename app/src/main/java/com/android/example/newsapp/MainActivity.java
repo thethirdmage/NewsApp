@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity
 
         // Get the current network state
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        NetworkInfo networkInfo = null;
+        if (manager != null) {
+            networkInfo = manager.getActiveNetworkInfo();
+        }
 
         // Check if there is a connection. If so, set up the loader. If not, display to user.
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<NewsStory>> loader, ArrayList<NewsStory> stories) {
         adapter.clear();
+
+        emptyView.setText(R.string.no_stories);
 
         if (stories != null && !stories.isEmpty()) {
             adapter.addAll(stories);

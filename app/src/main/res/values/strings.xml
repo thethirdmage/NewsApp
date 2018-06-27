@@ -1,5 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">News App</string>
-    <string name="api_key">69f99965-469b-4cb1-823f-fb535b57ff81</string>
+    <string name="api_key" tools:ignore="TypographyDashes">69f99965-469b-4cb1-823f-fb535b57ff81</string>
     <string name="no_connection">No internet connection.</string>
+    <string name="no_stories">No news stories matching that query.</string>
 </resources>
