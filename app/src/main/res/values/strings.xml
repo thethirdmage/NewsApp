@@ -1,9 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- App title [CHAR LIMIT=12] -->
     <string name="app_name">News App</string>
-    <string name="api_key" tools:ignore="TypographyDashes">69f99965-469b-4cb1-823f-fb535b57ff81</string>
+
+    <!-- API key for the JSON query -->
+    <string name="api_key" tools:ignore="TypographyDashes" translatable="false">69f99965-469b-4cb1-823f-fb535b57ff81</string>
+
+    <!-- Text to display when there's no internet connection [CHAR LIMIT=NONE] -->
     <string name="no_connection">No internet connection.</string>
+
+    <!-- Text to display when there are no stories matching user quert [CHAR LIMIT=NONE] -->
     <string name="no_stories">No news stories matching that query.</string>
+
+    <!-- Refresh menu item [CHAR LIMIT=NONE] -->
     <string name="refresh_menu_item">Refresh</string>
+
+    <!-- Settings menu item [CHAR LIMIT=NONE] -->
     <string name="settings_menu_item">Settings</string>
+
+    <!-- Settings activity title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Preferences</string>
 </resources>
