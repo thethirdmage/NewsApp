@@ -3,4 +3,6 @@
     <string name="api_key" tools:ignore="TypographyDashes">69f99965-469b-4cb1-823f-fb535b57ff81</string>
     <string name="no_connection">No internet connection.</string>
     <string name="no_stories">No news stories matching that query.</string>
+    <string name="refresh_menu_item">Refresh</string>
+    <string name="settings_menu_item">Settings</string>
 </resources>
