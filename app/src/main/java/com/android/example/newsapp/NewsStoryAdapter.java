@@ -17,7 +17,7 @@ public class NewsStoryAdapter extends ArrayAdapter<NewsStory> {
      * @param context     the current application context
      * @param newsStories an ArrayList of news stories
      */
-    public NewsStoryAdapter (Activity context, ArrayList<NewsStory> newsStories) {
+    NewsStoryAdapter (Activity context, ArrayList<NewsStory> newsStories) {
         super(context, 0, newsStories);
     }
 
@@ -50,10 +50,13 @@ public class NewsStoryAdapter extends ArrayAdapter<NewsStory> {
         TextView dateView = newsStoryView.findViewById(R.id.published);
 
         // Populate the views
-        titleView.setText(currentNewsStory.getTitle());
-        authorView.setText(currentNewsStory.getAuthor());
-        categoryView.setText(currentNewsStory.getCategory());
-        dateView.setText(currentNewsStory.getCategory());
+        if (currentNewsStory != null) {
+            titleView.setText(currentNewsStory.getTitle());
+            authorView.setText(currentNewsStory.getAuthor());
+            categoryView.setText(currentNewsStory.getCategory());
+            dateView.setText(currentNewsStory.getDate());
+        }
+
 
         // Finally, return the news story view
         return newsStoryView;
