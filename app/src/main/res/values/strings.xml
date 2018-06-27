@@ -5,4 +5,5 @@
     <string name="no_stories">No news stories matching that query.</string>
     <string name="refresh_menu_item">Refresh</string>
     <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Preferences</string>
 </resources>
