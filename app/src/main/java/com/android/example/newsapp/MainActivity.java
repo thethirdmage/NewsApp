@@ -1,14 +1,18 @@
 package com.android.example.newsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -47,6 +51,29 @@ public class MainActivity extends AppCompatActivity
         // Create the adapter, and set it to the ListView
         adapter = new NewsStoryAdapter(this, new ArrayList<NewsStory>());
         newsStoryList.setAdapter(adapter);
+
+        // Create an on-click listener
+        newsStoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                NewsStory story = adapter.getItem(i);
+
+                // If the story is null, or there is no URL (somehow), just go to The Guardian's website
+                String url = "https://www.theguardian.com/";
+
+                // All this eliminates the possibility of producing a NullPointerException
+                if (story != null) {
+                    url = story.getUrl();
+                }
+
+                Intent viewStoryIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+                // Check if there's a browser. If so, then go to the story.
+                if (viewStoryIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(viewStoryIntent);
+                }
+            }
+        });
     }
 
     @NonNull
