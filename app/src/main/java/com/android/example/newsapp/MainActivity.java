@@ -89,12 +89,6 @@ public class MainActivity extends AppCompatActivity
     public Loader<ArrayList<NewsStory>> onCreateLoader(int id, @Nullable Bundle args) {
         String apiKey = getString(R.string.api_key);
         String baseString = "http://content.guardianapis.com/search?";
-        /*String searchTarget = "world cup 2018";
-
-        String endingString = "&show-tags=contributor&order-by=newest&page-size&api-key=";
-
-        String jsonQuery = baseString + searchTarget + endingString + apiKey;
-        return new NewsStoryLoader(this, jsonQuery); */
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
