@@ -1,12 +1,12 @@
 package com.android.example.newsapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.provider.ContactsContract;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -88,13 +88,36 @@ public class MainActivity extends AppCompatActivity
     @Override
     public Loader<ArrayList<NewsStory>> onCreateLoader(int id, @Nullable Bundle args) {
         String apiKey = getString(R.string.api_key);
-        String searchTarget = "world cup 2018";
-        String baseString = "http://content.guardianapis.com/search?q=";
-        String endingString = "&show-tags=contributor&api-key=";
+        String baseString = "http://content.guardianapis.com/search?";
+        /*String searchTarget = "world cup 2018";
 
-        // Sample JSON query: http://content.guardianapis.com/search?q=debates&show-tags=contributor&api-key=69f99965-469b-4cb1-823f-fb535b57ff81
+        String endingString = "&show-tags=contributor&order-by=newest&page-size&api-key=";
+
         String jsonQuery = baseString + searchTarget + endingString + apiKey;
-        return new NewsStoryLoader(this, jsonQuery);
+        return new NewsStoryLoader(this, jsonQuery); */
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Get the settings from teh app
+        String searchTarget = preferences.getString(
+                        getString(R.string.settings_search_pref_key),
+                        getString(R.string.settings_search_pref_default));
+
+        String displayNum = preferences.getString(
+                        getString(R.string.settings_display_num_key),
+                        getString(R.string.settings_display_num_default));
+
+        Uri baseUri = Uri.parse(baseString);
+        Uri.Builder builder = baseUri.buildUpon();
+
+        // Add the items
+        builder.appendQueryParameter("q", searchTarget);
+        builder.appendQueryParameter("show-tags", "contributor");
+        builder.appendQueryParameter("order-by", "newest");
+        builder.appendQueryParameter("page-size", displayNum);
+        builder.appendQueryParameter("api-key", apiKey);
+
+        return new NewsStoryLoader(this, builder.toString());
     }
 
     @Override

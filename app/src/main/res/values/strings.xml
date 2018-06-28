@@ -20,4 +20,14 @@
 
     <!-- Settings activity title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Preferences</string>
+
+    <!-- Strings for search preference [CHAR LIMIT=30] -->
+    <string name="settings_search_pref_label">News topic</string>
+    <string name="settings_search_pref_key" translatable="false">search_title</string>
+    <string name="settings_search_pref_default" translatable="false">World Cup 2018</string>
+
+    <!-- Strings for result number [CHAR LIMIT=30] -->
+    <string name="settings_display_num_label">Stories to display</string>
+    <string name="settings_display_num_key" translatable="false">num_stories</string>
+    <string name="settings_display_num_default" translatable="false">10</string>
 </resources>
