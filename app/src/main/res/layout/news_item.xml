@@ -40,8 +40,11 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="in Media"
             android:id="@+id/section"
-            android:layout_toEndOf="@id/author"
-            android:layout_toRightOf="@id/author" />
+            android:layout_below="@id/author"
+            android:paddingRight="8dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +53,9 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             tools:text="June 13, 2018"
             android:id="@+id/published"
-            android:layout_below="@id/author" />
+            android:layout_below="@id/author"
+            android:layout_toRightOf="@id/section"
+            android:layout_toEndOf="@id/section"/>
 
     </RelativeLayout>
 
